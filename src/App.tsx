@@ -1,4 +1,4 @@
-import { FileTable } from "./components/FileTable";
+import FileTable from "./components/FileTable";
 import { data } from "./data/file";
 
 const App: React.FC = () => {

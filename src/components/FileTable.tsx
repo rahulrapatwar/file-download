@@ -1,15 +1,15 @@
 import React from "react";
+import { Table } from "./Table";
+import DownloadButton from "./DownloadButton";
+import { useTableSelection } from "../hooks/useTableSelection";
 import type { FileData } from "../types";
 import type { TableColumn } from "../types/table";
-import DownloadButton from "./DownloadButton";
-import { Table } from "./Table";
-import { useTableSelection } from "../hooks/useTableSelection";
 
 interface FileTableProps {
   data: FileData[];
 }
 
-export const FileTable: React.FC<FileTableProps> = ({ data }) => {
+const FileTable: React.FC<FileTableProps> = ({ data }) => {
   const isItemSelectable = (item: FileData) => item.status === "available";
 
   const {
@@ -23,7 +23,7 @@ export const FileTable: React.FC<FileTableProps> = ({ data }) => {
     isItemSelectable,
   });
 
-  const columns: TableColumn[] = [
+  const columns: TableColumn<FileData>[] = [
     {
       key: "name",
       header: "Name",
@@ -39,8 +39,25 @@ export const FileTable: React.FC<FileTableProps> = ({ data }) => {
     {
       key: "status",
       header: "Status",
+      render: (item) => (
+        <div className="flex items-center">
+          {item.status === "available" ? (
+            <>
+              <div className="w-4 h-4 bg-[#B9DE92] rounded-full mr-2"></div>
+              <div>
+                {item.status.charAt(0).toUpperCase() + item.status.slice(1)}
+              </div>
+            </>
+          ) : (
+            <div className="pl-4">
+              {item.status.charAt(0).toUpperCase() + item.status.slice(1)}
+            </div>
+          )}
+        </div>
+      ),
     },
   ];
+
   const handleDownload = () => {
     const selectedFiles = Array.from(selectedItems).map((index) => data[index]);
     const fileDetails = selectedFiles
@@ -48,15 +65,16 @@ export const FileTable: React.FC<FileTableProps> = ({ data }) => {
       .join("\n");
     alert(fileDetails);
   };
+
   return (
     <div className="p-3">
       <div className="flex items-center m-3 text-lg">
         <span className="w-4">
           <input
             type="checkbox"
-            className="w-4 h-4"
             checked={isAllSelected}
             onChange={handleSelectAll}
+            className="w-4 h-4"
             ref={selectAllRef}
           />
         </span>
@@ -87,3 +105,5 @@ export const FileTable: React.FC<FileTableProps> = ({ data }) => {
     </div>
   );
 };
+
+export default FileTable;

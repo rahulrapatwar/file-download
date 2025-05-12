@@ -1,10 +1,11 @@
-export interface TableColumn {
-    key: string;
-    header: string;
+export interface TableColumn<T> {
+  key: string;
+  header: string;
+  render?: (item: T) => React.ReactNode;
 }
 
 export interface TableProps<T> {
-  columns: TableColumn[];
+  columns: TableColumn<T>[];
   data: T[];
   onRowClick?: (index: number) => void;
   selectedItems?: Set<number>;
@@ -13,12 +14,12 @@ export interface TableProps<T> {
 
 export interface TableRowProps<T> {
   item: T;
-  columns: TableColumn[];
+  columns: TableColumn<T>[];
   isSelected?: boolean;
   onClick?: () => void;
   isSelectable?: boolean;
 }
 
-export interface TableHeaderProps {
-  columns: TableColumn[];
+export interface TableHeaderProps<T> {
+  columns: TableColumn<T>[];
 } 
