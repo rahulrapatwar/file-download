@@ -22,4 +22,4 @@ export interface TableRowProps<T> {
 
 export interface TableHeaderProps<T> {
   columns: TableColumn<T>[];
-} 
+}
