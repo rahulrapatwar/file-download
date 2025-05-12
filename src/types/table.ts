@@ -6,6 +6,9 @@ export interface TableColumn {
 export interface TableProps<T> {
   columns: TableColumn[];
   data: T[];
+  onRowClick?: (index: number) => void;
+  selectedItems?: Set<number>;
+  isItemSelectable?: (item: T) => boolean;
 }
 
 export interface TableRowProps<T> {

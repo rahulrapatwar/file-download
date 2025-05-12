@@ -5,6 +5,9 @@ import { TableRow } from './TableRow';
 export function Table<T>({ 
   columns, 
   data, 
+  onRowClick, 
+  selectedItems = new Set(),
+  isItemSelectable
 }: TableProps<T>) {
   return (
     <div>
@@ -18,6 +21,9 @@ export function Table<T>({
               key={index}
               item={item}
               columns={columns}
+              isSelected={selectedItems.has(index)}
+              onClick={() => onRowClick?.(index)}
+              isSelectable={isItemSelectable ? isItemSelectable(item) : true}
             />
           ))}
         </tbody>
