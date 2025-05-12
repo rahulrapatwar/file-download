@@ -12,7 +12,7 @@ interface FileTableProps {
 export const FileTable: React.FC<FileTableProps> = ({ data }) => {
   const isItemSelectable = (item: FileData) => item.status === "available";
 
-  const { selectedItems, isAllSelected, toggleSelect } =
+  const { selectedItems, isAllSelected, toggleSelect, handleSelectAll } =
     useTableSelection<FileData>({
       data,
       isItemSelectable,
@@ -43,7 +43,7 @@ export const FileTable: React.FC<FileTableProps> = ({ data }) => {
     <div className="p-3">
       <div className="flex items-center m-3 text-lg">
         <span className="w-4">
-          <input type="checkbox" className="w-4 h-4" checked={isAllSelected} />
+          <input type="checkbox" className="w-4 h-4" checked={isAllSelected} onChange={handleSelectAll} />
         </span>
         <span className="w-38 p-3">
           {selectedItems.size

@@ -8,6 +8,7 @@ interface UseTableSelectionReturn {
   selectedItems: Set<number>;
   isAllSelected: boolean;
   toggleSelect: (index: number) => void;
+  handleSelectAll: () => void;
 }
 
 export function useTableSelection<T>({
@@ -43,9 +44,21 @@ export function useTableSelection<T>({
       return newSelected;
     });
   };
+
+  const handleSelectAll = () => {
+    if (selectedItems.size === Object.keys(availableItems).length) {
+      setSelectedItems(new Set());
+      setIsAllSelected(false);
+    } else {
+      setSelectedItems(new Set(Object.keys(availableItems).map(Number)));
+      setIsAllSelected(true);
+    }
+  };
+
   return {
     selectedItems,
     isAllSelected,
     toggleSelect,
+    handleSelectAll
   };
 }
