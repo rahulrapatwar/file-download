@@ -26,7 +26,7 @@ export function TableRow<T>({
       </td>
       {columns.map((column) => (
         <td key={column.key} className="px-4 py-2">
-          {(item as any)[column.key]}
+          {column.render ? column.render(item) : (item as any)[column.key]}
         </td>
       ))}
     </tr>
