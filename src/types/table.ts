@@ -8,6 +8,14 @@ export interface TableProps<T> {
   data: T[];
 }
 
+export interface TableRowProps<T> {
+  item: T;
+  columns: TableColumn[];
+  isSelected?: boolean;
+  onClick?: () => void;
+  isSelectable?: boolean;
+}
+
 export interface TableHeaderProps {
   columns: TableColumn[];
 } 

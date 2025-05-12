@@ -1,5 +1,6 @@
 import type { TableProps } from '../types/table';
 import { TableHeader } from './TableHeader';
+import { TableRow } from './TableRow';
 
 export function Table<T>({ 
   columns, 
@@ -12,7 +13,13 @@ export function Table<T>({
           columns={columns}
         />
         <tbody>
-          {/* TODO */}
+          {data.map((item, index) => (
+            <TableRow<T>
+              key={index}
+              item={item}
+              columns={columns}
+            />
+          ))}
         </tbody>
       </table>
     </div>
