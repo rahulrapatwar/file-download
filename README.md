@@ -1,4 +1,4 @@
-# React + TypeScript + Vite
+# File Download (React + Vite + TypeScript)
 
 ## Prerequisites
 
@@ -54,16 +54,3 @@ npm run dev
 ```bash
 npm test
 ```
-
-5. Build for production:
-```bash
-npm run build
-```
-
-## Available Scripts
-
-- `npm run dev` - Start development server
-- `npm run build` - Build for production
-- `npm run test` - Run tests
-- `npm run lint` - Run ESLint
-- `npm run preview` - Preview production build
