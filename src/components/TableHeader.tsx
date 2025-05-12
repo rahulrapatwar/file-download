@@ -1,8 +1,8 @@
 import type { TableHeaderProps } from '../types/table';
 
-export function TableHeader({ 
+export function TableHeader<T>({ 
   columns, 
-}: TableHeaderProps) {
+}: TableHeaderProps<T>) {
   return (
     <thead className="border border-gray-400">
       <tr>
