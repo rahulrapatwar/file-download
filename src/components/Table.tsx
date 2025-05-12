@@ -12,7 +12,7 @@ export function Table<T>({
   return (
     <div>
       <table className="w-3/4 border border-gray-400">
-        <TableHeader
+        <TableHeader<T>
           columns={columns}
         />
         <tbody>
