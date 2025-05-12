@@ -1,5 +1,6 @@
 import React from "react";
 import type { FileData } from "../types";
+import type { TableColumn } from "../types/table";
 import DownloadButton from "./DownloadButton";
 
 interface FileTableProps {
@@ -7,7 +8,24 @@ interface FileTableProps {
 }
 
 export const FileTable: React.FC<FileTableProps> = ({ data }) => {
-
+  const columns: TableColumn[] = [
+    {
+      key: "name",
+      header: "Name",
+    },
+    {
+      key: "device",
+      header: "Device",
+    },
+    {
+      key: "path",
+      header: "Path",
+    },
+    {
+      key: "status",
+      header: "Status",
+    },
+  ];
   const handleDownload = () => {
     //TODO
   };
