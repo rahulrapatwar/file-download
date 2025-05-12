@@ -7,3 +7,7 @@ export interface TableProps<T> {
   columns: TableColumn[];
   data: T[];
 }
+
+export interface TableHeaderProps {
+  columns: TableColumn[];
+} 
