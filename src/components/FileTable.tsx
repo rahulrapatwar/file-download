@@ -2,6 +2,7 @@ import React from "react";
 import type { FileData } from "../types";
 import type { TableColumn } from "../types/table";
 import DownloadButton from "./DownloadButton";
+import { Table } from "./Table";
 
 interface FileTableProps {
   data: FileData[];
@@ -40,6 +41,10 @@ export const FileTable: React.FC<FileTableProps> = ({ data }) => {
           <DownloadButton onClick={handleDownload} isDisabled={false} />
         </span>
       </div>
+      <Table<FileData>
+        columns={columns}
+        data={data}
+      />
     </div>
   );
 };
