@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
+
 interface UseTableSelectionProps<T> {
   data: T[];
   isItemSelectable: (item: T) => boolean;
@@ -9,14 +10,16 @@ interface UseTableSelectionReturn {
   isAllSelected: boolean;
   toggleSelect: (index: number) => void;
   handleSelectAll: () => void;
+  selectAllRef: React.RefObject<HTMLInputElement | null>;
 }
 
 export function useTableSelection<T>({
   data,
-  isItemSelectable,
+  isItemSelectable = () => true,
 }: UseTableSelectionProps<T>): UseTableSelectionReturn {
   const [selectedItems, setSelectedItems] = useState<Set<number>>(new Set());
   const [isAllSelected, setIsAllSelected] = useState<boolean>(false);
+  const selectAllRef = useRef<HTMLInputElement>(null);
 
   const availableItems = data.reduce((acc, item, index) => {
     if (isItemSelectable(item)) {
@@ -24,6 +27,15 @@ export function useTableSelection<T>({
     }
     return acc;
   }, {} as Record<number, T>);
+
+  useEffect(() => {
+    if (selectAllRef.current) {
+      const isIndeterminate =
+        selectedItems.size > 0 &&
+        selectedItems.size < Object.keys(availableItems).length;
+      selectAllRef.current.indeterminate = isIndeterminate;
+    }
+  }, [selectedItems, availableItems]);
 
   const toggleSelect = (index: number) => {
     setSelectedItems((prevSelected) => {
@@ -59,6 +71,7 @@ export function useTableSelection<T>({
     selectedItems,
     isAllSelected,
     toggleSelect,
-    handleSelectAll
+    handleSelectAll,
+    selectAllRef,
   };
 }
