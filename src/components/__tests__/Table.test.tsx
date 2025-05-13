@@ -68,7 +68,7 @@ describe("Table", () => {
       />
     );
 
-    const table = screen.getByRole("table");
+    const table = screen.getByRole("grid");
     expect(table).toHaveClass("w-3/4", "border", "border-gray-400");
   });
 
@@ -82,6 +82,6 @@ describe("Table", () => {
       />
     );
 
-    expect(screen.getByRole("table")).toBeInTheDocument();
+    expect(screen.getByRole("grid")).toBeInTheDocument();
   });
 });

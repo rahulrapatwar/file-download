@@ -35,7 +35,12 @@ describe("TableRow", () => {
     render(
       <table>
         <tbody>
-          <TableRow item={mockItem} columns={mockColumns} onClick={noop} />
+          <TableRow
+            item={mockItem}
+            columns={mockColumns}
+            onClick={noop}
+            index={0}
+          />
         </tbody>
       </table>
     );
@@ -55,6 +60,7 @@ describe("TableRow", () => {
             columns={mockColumns}
             isSelectable={true}
             onClick={noop}
+            index={0}
           />
         </tbody>
       </table>
@@ -74,6 +80,7 @@ describe("TableRow", () => {
             columns={mockColumns}
             isSelectable={false}
             onClick={noop}
+            index={0}
           />
         </tbody>
       </table>
@@ -92,6 +99,7 @@ describe("TableRow", () => {
             columns={mockColumns}
             isSelected={true}
             onClick={noop}
+            index={0}
           />
         </tbody>
       </table>
@@ -110,6 +118,7 @@ describe("TableRow", () => {
             columns={mockColumns}
             isSelected={false}
             onClick={noop}
+            index={0}
           />
         </tbody>
       </table>
@@ -123,7 +132,12 @@ describe("TableRow", () => {
     render(
       <table>
         <tbody>
-          <TableRow item={mockItem} columns={mockColumns} onClick={noop} />
+          <TableRow
+            item={mockItem}
+            columns={mockColumns}
+            onClick={noop}
+            index={0}
+          />
         </tbody>
       </table>
     );
@@ -141,6 +155,7 @@ describe("TableRow", () => {
             item={mockItem}
             columns={mockColumns}
             onClick={mockOnClick}
+            index={0}
           />
         </tbody>
       </table>
@@ -149,5 +164,49 @@ describe("TableRow", () => {
     const checkbox = screen.getByRole("checkbox");
     fireEvent.click(checkbox);
     expect(mockOnClick).toHaveBeenCalled();
+  });
+
+  it("has correct data-index attribute", () => {
+    render(
+      <table>
+        <tbody>
+          <TableRow
+            item={mockItem}
+            columns={mockColumns}
+            onClick={noop}
+            index={0}
+          />
+        </tbody>
+      </table>
+    );
+
+    const row = screen.getByText("Test Item").closest("tr");
+    expect(row).toHaveAttribute("data-index", "0");
+  });
+
+  it("handles keyboard navigation", () => {
+    const mockOnClick = jest.fn();
+    render(
+      <table>
+        <tbody>
+          <TableRow
+            item={mockItem}
+            columns={mockColumns}
+            onClick={mockOnClick}
+            index={0}
+          />
+        </tbody>
+      </table>
+    );
+
+    const row = screen.getByText("Test Item").closest("tr");
+
+    // Test Space key
+    fireEvent.keyDown(row!, { key: " " });
+    expect(mockOnClick).toHaveBeenCalled();
+
+    // Test Enter key
+    fireEvent.keyDown(row!, { key: "Enter" });
+    expect(mockOnClick).toHaveBeenCalledTimes(2);
   });
 });
