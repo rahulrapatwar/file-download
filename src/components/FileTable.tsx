@@ -43,7 +43,10 @@ const FileTable: React.FC<FileTableProps> = ({ data }) => {
         <div className="flex items-center">
           {item.status === "available" ? (
             <>
-              <div className="w-4 h-4 bg-[#B9DE92] rounded-full mr-2"></div>
+              <div
+                className="w-4 h-4 bg-[#B9DE92] rounded-full mr-2"
+                aria-hidden="true"
+              ></div>
               <div>
                 {item.status.charAt(0).toUpperCase() + item.status.slice(1)}
               </div>
@@ -67,7 +70,7 @@ const FileTable: React.FC<FileTableProps> = ({ data }) => {
   };
 
   return (
-    <div className="p-3">
+    <div className="p-3" role="region" aria-label="File selection and download">
       <div className="flex items-center m-3 text-lg">
         <span className="w-4">
           <input
@@ -76,9 +79,10 @@ const FileTable: React.FC<FileTableProps> = ({ data }) => {
             onChange={handleSelectAll}
             className="w-4 h-4"
             ref={selectAllRef}
+            aria-label="Select all available files"
           />
         </span>
-        <span className="w-38 p-3">
+        <span className="w-38 p-3" aria-live="polite">
           {selectedItems.size
             ? `Selected ${selectedItems.size}`
             : "None Selected"}

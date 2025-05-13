@@ -17,8 +17,10 @@ const DownloadButton: React.FC<DownloadButtonProps> = ({
       className={`flex bg-white px-4 py-2 rounded disabled:opacity-50 ${
         isDisabled ? "bg-gray-300" : "bg-white"
       }`}
+      aria-label="Download selected files"
+      aria-disabled={isDisabled}
     >
-      <ArrowDownTrayIcon className="mr-2 size-6" />
+      <ArrowDownTrayIcon className="mr-2 size-6" aria-hidden="true" />
       Download Selected
     </button>
   );

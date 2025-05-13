@@ -18,6 +18,7 @@ export interface TableRowProps<T> {
   isSelected?: boolean;
   onClick?: () => void;
   isSelectable?: boolean;
+  index: number;
 }
 
 export interface TableHeaderProps<T> {
